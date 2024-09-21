@@ -24,18 +24,19 @@ class Shop(Product):
 
     def add(self, *products):
         for product in products:
-            if str(product) in self.get_products():
-                print('Продукт '+str(product)+' уже есть в магазине')
+            if str(product.name) in self.get_products():        #в условии проверка ТОЛЬКО ПО ИМЕНИ!
+                print('Продукт '+product.name+' уже есть в магазине')
             else:
                 file_products = open(self.__file_name,'a')
-                row_prud = '\n'+str(product.name)+', '+str(product.weight)+', '+str(product.category)
-                file_products.write(row_prud)
+                row_prod = str(product.name)+', '+str(product.weight)+', '+str(product.category)+'\n'
+                file_products.write(row_prod)
                 file_products.close()
 
 s1 = Shop()
 p1 = Product('Potato', 50.5, 'Vegetables')
 p2 = Product('Spaghetti', 3.4, 'Groceries')
-p3 = Product('Potato', 5.5, 'Vegetables')
+p3 = Product('Potato', 5.5, 'Vegetables')   #имя "Potato" уже есть с другим весом в р1,
+                                                                # по условии задачи не добавлять в Shop!
 print(p1) # __str__
 
 print(s1.get_products())
